@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Location AI</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    #locationInput {
+      padding: 10px;
+      width: 300px;
+      font-size: 16px;
+    }
+
+    #searchBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #2c3e50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌍 Know The Spot * LocAI</h1>
+<p style="font-size: 1.1rem; color: #444; margin-top: -10px;">
+  Discover rich insights about any famous place around the world — history, food, culture & more!
+</p>
+  <input type="text" id="locationInput" placeholder="Enter a location (e.g. Sydney)" />
+  <button id="searchBtn" onclick="getLocationInfo()">Search</button>
+
+  <div id="result"></div>
+
+  <script>
+    async function getLocationInfo() {
+      const location = document.getElementById('locationInput').value;
+      const result = document.getElementById('result');
+      result.innerHTML = "Fetching info for " + location + "...";
+
+      try {
+        const res = await fetch("https://hook.eu2.make.com/vu6r56npnxd8pfyt7pgc3q4kqwp554oq?location=" + encodeURIComponent(location));
+        const html = await res.text();
+        result.innerHTML = html;
+      } catch (error) {
+        result.innerHTML = "<p style='color:red;'>Error fetching data: " + error.message + "</p>";
+      }
+    }
+  </script>
+</body>
+</html>
